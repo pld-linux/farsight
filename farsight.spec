@@ -1,18 +1,24 @@
 #
 Summary:	Farsight library
 Name:		farsight
-Version:	0.1.25
+Version:	0.1.27
 Release:	1
 License:	LGPL
 Group:		Development/Libraries
-Source0: http://farsight.freedesktop.org/releases/farsight/farsight-0.1.25.tar.gz
-# Source0-md5:	3023e5013e612c7debc5763e14c78123
+Source0:	http://farsight.freedesktop.org/releases/farsight/%{name}-%{version}.tar.gz
+# Source0-md5:	ad261dfdbe1266c2a9c1369537c062cb
 URL:		http://farsight.freedesktop.org/
-BuildRequires:	glib2-devel
-#BuildRequires:	autoconf
-#BuildRequires:	automake
-#BuildRequires:	intltool
-#BuildRequires:	libtool
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	check >= 0.9.4
+BuildRequires:	glib2-devel >= 1:2.6.0
+BuildRequires:	gnet-devel
+BuildRequires:	gstreamer-devel >= 0.10.13
+BuildRequires:	gstreamer-plugins-base-devel
+BuildRequires:	gtk-doc >= 1.6
+BuildRequires:	libtool
+BuildRequires:	libjingle-devel >= 0.3.11
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,14 +51,12 @@ Statyczna biblioteka farsight.
 %setup -q
 
 %build
-#%%{__intltoolize}
-#%%{__gettextize}
-#%%{__libtoolize}
-%{__aclocal}
+%{__libtoolize}
+%{__aclocal} -I m4
 %{__autoconf}
-#%%{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--enable-static
 %{__make}
 
 %install
@@ -60,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/farsight-0.1-3/lib*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/farsight-0.1-3/lib*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,3 +77,18 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 #%doc AUTHORS CREDITS ChangeLog NEWS README THANKS TODO
+%attr(755,root,root) %{_libdir}/libfarsight-0.1.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libfarsight-0.1.so.3
+%dir %{_sysconfdir}/farsight
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/farsight/*.conf
+%dir %{_libdir}/farsight-0.1-3
+%attr(755,root,root) %{_libdir}/farsight-0.1-3/lib*.so
+
+%files devel
+%attr(755,root,root) %{_libdir}/libfarsight-0.1.so
+%{_libdir}/libfarsight-0.1.la
+%{_includedir}/farsight-0.1
+%{_pkgconfigdir}/farsight-0.1.pc
+
+%files static
+%{_libdir}/libfarsight-0.1.a
