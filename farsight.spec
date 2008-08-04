@@ -1,12 +1,12 @@
 #
 Summary:	Farsight library
 Name:		farsight
-Version:	0.1.27
+Version:	0.1.28
 Release:	1
 License:	LGPL
 Group:		Development/Libraries
 Source0:	http://farsight.freedesktop.org/releases/farsight/%{name}-%{version}.tar.gz
-# Source0-md5:	ad261dfdbe1266c2a9c1369537c062cb
+# Source0-md5:	6439b749ecf83bb956a6c88a7843343e
 URL:		http://farsight.freedesktop.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
