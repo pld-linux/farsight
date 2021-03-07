@@ -1,0 +1,14 @@
+--- farsight-0.1.28/m4/gst-feature.m4.orig	2008-02-18 20:29:49.000000000 +0100
++++ farsight-0.1.28/m4/gst-feature.m4	2021-03-04 19:49:05.015932148 +0100
+@@ -46,10 +46,10 @@
+ dnl GST_PLUGINS_NO will contain those that won't be built
+ 
+ AC_DEFUN([GST_CHECK_FEATURE],
++[dnl
+ AC_MSG_NOTICE(***)
+ AC_MSG_NOTICE(*** checking plugin: [$3] ***)
+ AC_MSG_NOTICE(***)
+-[dnl
+ builtin(define, [gst_endisable], ifelse($5, [disabled], [enable], [disable]))dnl
+ dnl if it is set to NO, then don't even consider it for building
+ NOUSE=
