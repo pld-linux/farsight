@@ -42,6 +42,11 @@ Farsight is a library to allow you to easily setup network media
 streaming, with various forms of NAT traversal. It has support for
 protocol plugins.
 
+%description -l pl.UTF-8
+Farsight to biblioteka pozwalająca na łatwe rozpoczęcie przesyłania
+strumieni multimedialnych z różnymi formami przechodzenia NAT. Ma
+obsługę wtyczek protokołów.
+
 %package devel
 Summary:	Header files for farsight library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki farsight
